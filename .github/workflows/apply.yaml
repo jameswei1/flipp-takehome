@@ -55,9 +55,3 @@ jobs:
       env:
         AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    
-    - name: Configure Infrastructure
-      run: |
-        ssh -i flipp-key -o StrictHostKeychecking=no ec2-user@$(terraform output -raw public_ip) "sudo yum install git -y;sudo yum install nginx -y;git clone https://github.com/jameswei1/flipp-takehome.git"
-        ssh -i flipp-key -o StrictHostKeychecking=no ec2-user@$(terraform output -raw public_ip) "sudo mv flipp-takehome/nginx.conf /etc/nginx/nginx.conf -f;sudo systemctl start nginx"
-        ssh -i flipp-key -o StrictHostKeychecking=no ec2-user@$(terraform output -raw public_ip) "sudo yum install nodejs -y;sudo npm install forever -g;cd flipp-takehome;npm install;forever start server.js"
