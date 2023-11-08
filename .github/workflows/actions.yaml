@@ -42,13 +42,8 @@ jobs:
         AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     
-  pr_cmt:
-    name: Create comment on PR
-    runs-on: ubuntu-latest
-
-    steps:
     - name: Create Pull Request Comment with Plan Output
-      run: thollander/actions-comment-pull-request@v2
+      uses: thollander/actions-comment-pull-request@v2
       with:
         message: |
           ### Terraform Plan \`${{ steps.plan.outcome }}\`
