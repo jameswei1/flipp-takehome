@@ -21,8 +21,11 @@ jobs:
     - name: Checkout Repo
       uses: actions/checkout@v1
     
-    - name: Generate FAKE SSH keys
+    - name: Generate FAKE SSH public keys
       run: echo "some text here" > flipp-key.pub
+
+    - name: Generate FAKE SSH private keys
+      run: echo "some text here" > flipp-key
 
     - name: Terraform Install
       uses: hashicorp/setup-terraform@v2
