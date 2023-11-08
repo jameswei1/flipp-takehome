@@ -14,7 +14,7 @@ jobs:
     - name: Checkout Repo
       uses: actions/checkout@v1
 
-    - name: Terraform Init
+    - name: Terraform Install
       uses: hashicorp/setup-terraform@v2
       with:
         terraform_version: "1.6.3"
@@ -23,3 +23,12 @@ jobs:
         TF_ACTION_WORKING_DIR: 'terraform'
         AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    - name: Terraform Init
+      run: terraform init
+    
+    - name: Terraform Validate
+      run: terraform validate -no-color
+
+    - name: Terraform Plan
+      run: terraform plan -no-color
