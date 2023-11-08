@@ -9,7 +9,7 @@ on:
 
 jobs:
   tf_fmt:
-    name: Run terraform plan
+    name: Run terraform plan, comment output on PR
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -18,6 +18,9 @@ jobs:
     steps:
     - name: Checkout Repo
       uses: actions/checkout@v1
+    
+    - name: Generate FAKE SSH keys
+      run: echo "some text here" > flipp-key.pub
 
     - name: Terraform Install
       uses: hashicorp/setup-terraform@v2
