@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master
+      paths:
+        - terraform/**
 
 jobs:
   tf_fmt:
@@ -40,7 +42,20 @@ jobs:
       run: terraform validate -no-color
 
     - name: Terraform Plan
+      id: plan
       run: terraform plan -no-color
       env:
         AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    
+    - name: Create Pull Request
+      run: peter-evans/create-pull-request@v5
+      title: "Requested changes to infrastructure"
+      branch: terraform-changes
+      delete-branch: true
+      body: |
+        ### Terraform Plan \`${{ steps.plan.outcome }}\`
+        \`\`\`\n
+        ${{ steps.plan.outputs.stdout }}
+        \`\`\`
+        *Pusher: @${{ github.actor }}
