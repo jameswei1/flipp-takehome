@@ -9,6 +9,8 @@ on:
 
 jobs:
   tf_fmt:
+    permissions: 
+      pull-requests: write 
     name: Run terraform plan, comment output on PR
     runs-on: ubuntu-latest
     defaults:
