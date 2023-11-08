@@ -25,3 +25,21 @@ Clone repo locally, cd into repo, run:
     * If you are re-running, just type `y` when prompted to overwrite existing ssh keys
 * go to displayed url (last line of output)
 * `terraform destroy` when finished (will prompt for confirmation)
+
+### Github Actions CICD
+Plan workflow triggered on pull request creation on `master` branch and `terraform` folder. Runs terraform init, validate, plan, and will modify PR with comment that includes plan output.  
+Apply workflow triggered on merge to `master` branch and `terraform` folder. Runst terraform init, validate, plan, apply and will also configure remote instances.
+
+### Limitations and Next Steps
+Limitations:
+* Terraform state file is not stored ideally (should be in a remote S3 bucket)
+    * Didn't get to that, oh well
+* Am using shell scripts and SSH for configuration management (should ideally use SaltStack, Ansible Playbooks, etc.)
+    * Didn't get to that, oh well
+* Website looks very simple
+* SSH keys are actually generated and used on Github Runners by Apply workflow. Not very safe.  
+
+Next Steps:
+* Fix configuration management (use tool listed above or custom AMI, which can be shared to AWS accounts or made public)
+* MAke a frontend for the website?
+

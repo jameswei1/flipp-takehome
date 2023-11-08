@@ -1,13 +1,13 @@
 name: Apply Infrastructure Changes
 
-on:
-  pull_request:
-    types:
-      - closed
-    branches:
-      - master
-    paths:
-      - terraform/**
+on: workflow_dispatch
+  # pull_request:
+  #   types:
+  #     - closed
+  #   branches:
+  #     - master
+  #   paths:
+  #     - terraform/**
 
 jobs:
   if_merged:
