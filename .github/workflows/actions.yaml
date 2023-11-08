@@ -50,12 +50,13 @@ jobs:
     
     - name: Create Pull Request
       run: peter-evans/create-pull-request@v5
-      title: "Requested changes to infrastructure"
-      branch: terraform-changes
-      delete-branch: true
-      body: |
-        ### Terraform Plan \`${{ steps.plan.outcome }}\`
-        \`\`\`\n
-        ${{ steps.plan.outputs.stdout }}
-        \`\`\`
-        *Pusher: @${{ github.actor }}
+      with:
+        title: "Requested changes to infrastructure"
+        branch: terraform-changes
+        delete-branch: true
+        body: |
+          ### Terraform Plan \`${{ steps.plan.outcome }}\`
+          \`\`\`\n
+          ${{ steps.plan.outputs.stdout }}
+          \`\`\`
+          *Pusher: @${{ github.actor }}
