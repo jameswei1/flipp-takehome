@@ -8,7 +8,7 @@ on:
 jobs:
   tf_fmt:
     name: Deploy Site
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
 
     - name: Checkout Repo
