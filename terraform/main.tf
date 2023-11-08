@@ -24,3 +24,5 @@ resource "aws_instance" "flipp-takehome-test" {
   key_name        = aws_key_pair.ec2_ssh_keys.key_name
   security_groups = ["launch-wizard-2"]
 }
+
+# dummy comment
