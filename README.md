@@ -7,6 +7,7 @@ Returns host machine's public IP and current time as formatted plaintext string.
 
 ### Infrastructure Automation
 Infrastructure deployment automated using Terraform, shell script.  
+Can configure AWS region using Terraform variable in `variables.tf`
 The shell script `deploy.sh` will:
 * generate a ssh-key used for connecting to the new EC2 instance
 * deploy infrastructure (EC2, ssh keypair) using Terraform init, plan, apply.
