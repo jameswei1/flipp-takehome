@@ -42,4 +42,5 @@ Limitations:
 Next Steps:
 * Fix configuration management (use tool listed above or custom AMI, which can be shared to AWS accounts or made public)
 * MAke a frontend for the website?
+* Fix duplicate keypair issue, since the same keypair is created repeatedly (force users to change keypair name to something unique each time?)
 
