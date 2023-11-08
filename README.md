@@ -37,5 +37,9 @@ Limitations:
 * Am using shell scripts and SSH for configuration management (should ideally use SaltStack, Ansible Playbooks, etc.)
     * Didn't get to that, oh well
 * Website looks very simple
-* SSH keys are actually generated and used on Github Runners by Apply workflow. Not very safe.
+* SSH keys are actually generated and used on Github Runners by Apply workflow. Not very safe.  
+
+Next Steps:
+* Fix configuration management (use tool listed above or custom AMI, which can be shared to AWS accounts or made public)
+* MAke a frontend for the website?
 
