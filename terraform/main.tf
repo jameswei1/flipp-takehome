@@ -18,9 +18,10 @@ resource "aws_key_pair" "ec2_ssh_keys" {
 }
 
 # Setting up the EC2 instace named as flipp-takehome
-resource "aws_instance" "flipp-takehome" {
+resource "aws_instance" "flipp-takehome-test" {
   ami             = "ami-089c26792dcb1fbd4"
   instance_type   = var.ec2_type
   key_name        = aws_key_pair.ec2_ssh_keys.key_name
   security_groups = ["launch-wizard-2"]
 }
+# Dummy comment
