@@ -35,8 +35,6 @@ jobs:
 
     - name: Change permissions for SSH keys
       run: chmod 400 flipp-key
-
-    - name: 
     
     - name: Terraform Validate
       run: terraform validate -no-color
