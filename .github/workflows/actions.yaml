@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./terraform
-        
+        working-directory: ../terraform
+
     steps:
     - name: Print Working Dir
       run: pwd
