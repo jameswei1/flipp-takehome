@@ -33,9 +33,9 @@ Apply workflow triggered on merge to `master` branch and `terraform` folder. Run
 ### Limitations and Next Steps
 Limitations:
 * Terraform state file is not stored ideally (should be in a remote S3 bucket)
-    * Didn't get to that, oh well
-* Am using shell scripts and SSH for configuration management (should ideally use SaltStack, Ansible Playbooks, etc.)
-    * Didn't get to that, oh well
+    * Didn't get to that
+* Am using terraform remote-exec provisioner and SSH for configuration management (should ideally use SaltStack, Ansible Playbooks, etc.)
+    * Didn't get to that
 * Website looks very simple
 * SSH keys are actually generated and used on Github Runners by Apply workflow. Not very safe.  
 
@@ -44,4 +44,5 @@ Next Steps:
 * MAke a frontend for the website?
 * Fix duplicate keypair issue, since the same keypair is created repeatedly (force users to change keypair name to something unique each time?)
 * Better yet, remove dependence on SSH keys altogether
+* Merge still allowed before GHA done running, should disable this until checks pass
 
