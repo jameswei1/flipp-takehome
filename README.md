@@ -21,7 +21,7 @@ Clone repo locally, cd into repo, run:
     * export AWS_ACCESS_KEY_ID="your-access-key-id"
     export AWS_SECRET_ACCESS_KEY="your-secret-access-key"
     export AWS_DEFAULT_REGION="your-region”
-* `sh deploy.sh` to deploy (will prompt ONCE for confirmation of ssh to unknown host, type `yes`)
+* `sh deploy.sh` to deploy
     * If you are re-running, just type `y` when prompted to overwrite existing ssh keys
 * go to displayed url (last line of output)
 * `terraform destroy` when finished (will prompt for confirmation)
