@@ -1,17 +1,17 @@
-name: Deploy Infrastructure
+name: Apply Infrastructure Changes
 
 on:
   pull_request:
+    types:
+      - closed
     branches:
       - master
     paths:
       - terraform/**
 
 jobs:
-  tf_fmt:
-    permissions: 
-      pull-requests: write 
-    name: Run terraform plan, comment output on PR
+  if_merged:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -20,9 +20,12 @@ jobs:
     steps:
     - name: Checkout Repo
       uses: actions/checkout@v1
-    
-    - name: Generate FAKE SSH keys
-      run: echo "some text here" > flipp-key.pub
+
+    - name: Generate SSH keys
+      run: ssh-keygen -t rsa -b 4096 -f ./flipp-key -q -N ""
+
+    - name: Change permissions for SSH keys
+      run: chmod 400 flipp-key
 
     - name: Terraform Install
       uses: hashicorp/setup-terraform@v2
@@ -47,11 +50,8 @@ jobs:
         AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     
-    - name: Create Pull Request Comment with Plan Output
-      uses: thollander/actions-comment-pull-request@v2
-      with:
-        message: |
-          ### Terraform Plan \`${{ steps.plan.outcome }}\`
-          \`\`\`\n
-          ${{ steps.plan.outputs.stdout }}
-          \`\`\`
+    - name: Terraform Apply
+      run: terraform apply -auto-approve
+      env:
+        AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
