@@ -9,13 +9,13 @@ jobs:
   tf_fmt:
     name: Deploy Site
     runs-on: ubuntu-latest
-    # defaults:
-    #   run:
-    #     working-directory: terraform
+    defaults:
+      run:
+        working-directory: ./terraform
 
     steps:
     - name: LS
-      run: ls
+      run: pwd
 
     - name: Checkout Repo
       uses: actions/checkout@v1
