@@ -16,6 +16,6 @@ app.listen(port, () => {
   axios.get('https://api.ipify.org?format=json')
   .then((res) => {
     public_ip = res.data.ip
+    console.log(`Server is running on port ${port} at ${public_ip}, so go to ${public_ip}/api to see host ip and time`)
   })
-  console.log(`Server is running on port ${port} at ${public_ip}, so go to ${public_ip}/api to see host ip and time`);
 });
