@@ -44,6 +44,7 @@ jobs:
     
     - name: Create Pull Request Comment with Plan Output
       run: thollander/actions-comment-pull-request@v2
+      with:
         message: |
           ### Terraform Plan \`${{ steps.plan.outcome }}\`
           \`\`\`\n
