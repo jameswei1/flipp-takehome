@@ -1,7 +1,7 @@
 name: Deploy Infrastructure
 
 on:
-  push:
+  pull_request:
     branches:
       - master
     paths:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   tf_fmt:
-    name: Deploy Site
+    name: Plan changes on pull request
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -32,12 +32,6 @@ jobs:
     - name: Terraform Init
       run: terraform init
     
-    - name: Generate SSH keys
-      run: ssh-keygen -t rsa -b 4096 -f ./flipp-key -q -N ""
-
-    - name: Change permissions for SSH keys
-      run: chmod 400 flipp-key
-    
     - name: Terraform Validate
       run: terraform validate -no-color
 
@@ -48,15 +42,10 @@ jobs:
         AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     
-    - name: Create Pull Request
-      run: peter-evans/create-pull-request@v5
-      with:
-        title: "Requested changes to infrastructure"
-        branch: terraform-changes
-        delete-branch: true
-        body: |
+    - name: Create Pull Request Comment with Plan Output
+      run: thollander/actions-comment-pull-request@v2
+        message: |
           ### Terraform Plan \`${{ steps.plan.outcome }}\`
           \`\`\`\n
           ${{ steps.plan.outputs.stdout }}
           \`\`\`
-          *Pusher: @${{ github.actor }}
